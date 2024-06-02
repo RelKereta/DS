@@ -135,21 +135,43 @@ class RestaurantManagementSystem {
         RestaurantManagementSystem rms = new RestaurantManagementSystem();
 
         // Adding items
-        int i;
-        for (i = 0; i <= 25; i++) {
-            rms.addMenuItem(i, "Item" + i);
-            rms.addReservation(i, "Customer" + i);
-            rms.placeOrder(i, "Order" + i);
+        long addingStartTime = System.nanoTime();
+        for (int i = 0; i < 25; i++) {
+            rms.addMenuItem(i, "Item " + i);
+            rms.addReservation(i, "Customer " + i);
+            rms.placeOrder(i, "Order " + i);
         }
+        long addingEndTime = System.nanoTime();
 
-        long midTime = System.nanoTime(); // Time after setting up the system
+        // Deleting an item
+        long deletingStartTime = System.nanoTime();
+        rms.deleteMenuItem(5);
+        rms.deleteReservation(5);
+        rms.deleteOrder(5);
+        long deletingEndTime = System.nanoTime();
+
+        // Inserting an item
+        long insertingStartTime = System.nanoTime();
+        rms.insertMenuItem(5, "Magic Item");
+        rms.insertReservation(5, "Magic Customer");
+        rms.insertOrder(5, "Magic Order");
+        long insertingEndTime = System.nanoTime();
 
         // Displaying menu, reservations, and processing orders
+        long displayingStartTime = System.nanoTime();
         rms.displayMenu();
         rms.displayReservations();
         rms.processOrders();
+        long displayingEndTime = System.nanoTime();
 
-        long endTime = System.nanoTime(); // Time after processing
+        // Searching for items
+        long searchingStartTime = System.nanoTime();
+        rms.searchMenuItem(5);
+        rms.searchReservation(5);
+        rms.searchOrder(5);
+        long searchingEndTime = System.nanoTime();
+
+        long endTime = System.nanoTime(); // Time after searching
 
         // Calculate memory usage
         long totalMem = rt.totalMemory();
@@ -157,39 +179,12 @@ class RestaurantManagementSystem {
         long usedMem = totalMem - freeMem; // Calculate the memory being used
 
         // Print time and memory usage
-        System.out.println("\nTime taken to set up the system: " + (midTime - startTime) + " ns");
-        System.out.println("Time taken to process the orders: " + (endTime - midTime) + " ns");
+        System.out.println("\nTime taken to add to the system: " + (addingEndTime - addingStartTime) + " ns");
+        System.out.println("Time taken to delete from the system: " + (deletingEndTime - deletingStartTime) + " ns");
+        System.out.println("Time taken to insert into the system: " + (insertingEndTime - insertingStartTime) + " ns");
+        System.out.println("Time taken to print the system: " + (displayingEndTime - displayingStartTime) + " ns");
+        System.out.println("Time taken to search the system: " + (searchingEndTime - searchingStartTime) + " ns");
         System.out.println("Total runtime: " + (endTime - startTime) + " ns");
         System.out.println("Amount of used memory: " + usedMem / (1024.0 * 1024.0) + " MB");
-
-        // Measure search, insert, and delete operations
-        long searchStart = System.nanoTime();
-        rms.searchMenuItem(12);
-        rms.searchReservation(12);
-        rms.searchOrder(12);
-        long searchEnd = System.nanoTime();
-
-        long insertStart = System.nanoTime();
-        rms.insertMenuItem(26, "NewItem");
-        rms.insertReservation(26, "NewCustomer");
-        rms.insertOrder(26, "NewOrder");
-        long insertEnd = System.nanoTime();
-
-        long deleteStart = System.nanoTime();
-        rms.deleteMenuItem(12);
-        rms.deleteReservation(12);
-        rms.deleteOrder(12);
-        long deleteEnd = System.nanoTime();
-
-        // Calculate memory usage after operations
-        long totalMemAfterOps = rt.totalMemory();
-        long freeMemAfterOps = rt.freeMemory();
-        long usedMemAfterOps = totalMemAfterOps - freeMemAfterOps;
-
-        // Print time and memory usage for search, insert, and delete operations
-        System.out.println("\nTime taken for search operations: " + (searchEnd - searchStart) + " ns");
-        System.out.println("Time taken for insert operations: " + (insertEnd - insertStart) + " ns");
-        System.out.println("Time taken for delete operations: " + (deleteEnd - deleteStart) + " ns");
-        System.out.println("Amount of used memory after operations: " + usedMemAfterOps / (1024.0 * 1024.0) + " MB");
     }
 }
