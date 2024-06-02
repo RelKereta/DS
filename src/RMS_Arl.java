@@ -56,7 +56,7 @@ class RMS_Arl {
 
         RMS_Arl brms = new RMS_Arl();
 
-        for (int i = 0;i < 10000; i++){
+        for (int i = 0;i < 25; i++){
             // Adding menu items
             brms.addMenuItem("Item: " +i);
 

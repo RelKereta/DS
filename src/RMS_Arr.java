@@ -1,14 +1,14 @@
 class RMS_Arr {
     // Menu using arrays
-    String[] menuItems = new String[10];
+    String[] menuItems = new String[25];
     int menuCount = 0;
 
     // Reservations using arrays
-    String[] reservations = new String[10];
+    String[] reservations = new String[25];
     int reservationCount = 0;
 
     // Orders using arrays
-    String[] orders = new String[10];
+    String[] orders = new String[25];
     int orderCount = 0;
 
     // Add a menu item
@@ -101,7 +101,7 @@ class RMS_Arr {
 
         RMS_Arr brms = new RMS_Arr();
 
-        int inputn = 10;
+        int inputn = 25;
         for (int i = 0; i < inputn;i++){
             // Adding menu items
             brms.addMenuItem("Item " + i);
