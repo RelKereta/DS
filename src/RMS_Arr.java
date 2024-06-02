@@ -152,8 +152,8 @@ class RMS_Arr {
         System.out.println("\nTime taken to add to the system: " + (addingTime - startTime) + " ns");
         System.out.println("Time taken to remove to the system: " + (removingTime - addingTime) + " ns");
         System.out.println("Time taken to insert system: " + (insertTime - removingTime) + " ns");
-        System.out.println("Time taken to print the orders: " + (printingTime - insertTime) + " ns");
-        System.out.println("Time taken to search the orders: " + (endTime - printingTime) + " ns");
+        System.out.println("Time taken to print the system: " + (printingTime - insertTime) + " ns");
+        System.out.println("Time taken to search the system: " + (endTime - printingTime) + " ns");
         System.out.println("Total runtime: " + (endTime - startTime) + " ns");
         System.out.println("Amount of used memory: " + usedMem / (1024.0 * 1024.0) + " MB");
     }
