@@ -10,22 +10,6 @@ class RMS_Arl {
     // Orders using arrays
     ArrayList<String>  orders = new ArrayList<>();
 
-    // Add a menu item
-    void addMenuItem(String item) {
-        menuItems.add(item);
-    }
-
-    // Add a reservation
-    void addReservation(String customerDetails) {
-        reservations.add(customerDetails);
-    }
-
-    // Place an order
-    void placeOrder(String orderDetails) {
-        orders.add(orderDetails);
-        //orders[ordersCount++] = orderDetails;
-    }
-
     // Display the menu
     void displayMenu() {
         System.out.println("Menu:");
@@ -56,25 +40,55 @@ class RMS_Arl {
 
         RMS_Arl brms = new RMS_Arl();
 
-        for (int i = 0;i < 25; i++){
+        for (int i = 0;i < 10; i++){
             // Adding menu items
-            brms.addMenuItem("Item: " +i);
+            brms.menuItems.add("Item: " + i);
 
             // Adding reservations
-            brms.addReservation("Name: " + i);
+            brms.reservations.add("Name: " + i);
 
             // Placing orders
-            brms.placeOrder("Food: " + i);
+            brms.orders.add("Food: " + i);
         }
 
-        long midTime = System.nanoTime(); // Time after setting up the system
+        long addingTime = System.nanoTime(); // Time after adding the system
+
+        brms.menuItems.add(5, "magic");
+        brms.reservations.add(5,"magic");
+        brms.orders.add(5,"magic");
+
+        long insertingTime = System.nanoTime(); // Time after inserting into the system;
+
+        brms.menuItems.remove(6);
+        brms.reservations.remove(6);
+        brms.orders.remove(6);
+
+        long removeTime = System.nanoTime(); // Time after removing element from system
 
         // Displaying menu, reservations, and processing orders
         brms.displayMenu();
         brms.displayReservations();
         brms.processOrders();
 
-        long endTime = System.nanoTime(); // Time after processing
+        long printingTime = System.nanoTime(); // Time after printing
+
+        if (brms.menuItems.contains("magic")){
+            System.out.println("Exist at " + brms.menuItems.indexOf("magic"));
+        } else {
+            System.out.println("Does not exist");
+        }
+        if (brms.reservations.contains("magic")){
+            System.out.println("Exist at " + brms.reservations.indexOf("magic"));
+        } else {
+            System.out.println("Does not exist");
+        }
+        if (brms.orders.contains("magic")){
+            System.out.println("Exist at " + brms.orders.indexOf("magic"));
+        } else {
+            System.out.println("Does not exist");
+        }
+
+        long endTime = System.nanoTime(); // Time for program
 
         // Calculate memory usage
         long totalMem = rt.totalMemory();
@@ -82,8 +96,11 @@ class RMS_Arl {
         long usedMem = totalMem - freeMem; // Calculate the memory being used
 
         // Print time and memory usage
-        System.out.println("\nTime taken to set up the system: " + (midTime - startTime) + " ns");
-        System.out.println("Time taken to process the orders: " + (endTime - midTime) + " ns");
+        System.out.println("\nTime taken to add the system: " + (addingTime - startTime) + " ns");
+        System.out.println("Time taken to insert the orders: " + (insertingTime - addingTime) + " ns");
+        System.out.println("Time taken to remove element: " + (removeTime - insertingTime) + " ns");
+        System.out.println("Time taken to print the orders: " + (printingTime - removeTime) + " ns");
+        System.out.println("Time taken to search the orders: " + (endTime - printingTime) + " ns");
         System.out.println("Total runtime: " + (endTime - startTime) + " ns");
         System.out.println("Amount of used memory: " + usedMem / (1024.0 * 1024.0) + " MB");
     }
